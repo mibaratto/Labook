@@ -22,12 +22,12 @@ CREATE TABLE posts (
 
 CREATE TABLE likes_dislikes (
   user_id TEXT NOT NULL,
-  posts_id TEXT NOT NULL,
+  post_id TEXT NOT NULL,
   like INTEGER NOT NULL,
   FOREIGN KEY (user_id) REFERENCES users (id)
     ON UPDATE CASCADE
     ON DELETE CASCADE,
-  FOREIGN KEY (posts_id) REFERENCES posts (id)
+  FOREIGN KEY (post_id) REFERENCES posts (id)
     ON UPDATE CASCADE
     ON DELETE CASCADE
 );
@@ -51,7 +51,7 @@ INSERT INTO posts (id, creator_id, name)
     ('p002','u002', 'Amanhã tenho prova de inglês! Estou estudando muito!');
 
 
-INSERT INTO likes_dislikes (user_id, posts_id, like)
+INSERT INTO likes_dislikes (user_id, post_id, like)
   VALUES
   ('u002','p001','1'),
   ('u003','p001','1'),
