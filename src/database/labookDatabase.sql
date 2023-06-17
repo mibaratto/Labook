@@ -10,7 +10,7 @@ CREATE TABLE users (
 CREATE TABLE posts (
     id TEXT PRIMARY KEY UNIQUE NOT NULL,
     creator_id TEXT UNIQUE NOT NULL,
-    name TEXT NOT NULL,
+    content TEXT NOT NULL,
     likes INTEGER DEFAULT(0) NOT NULL,
     dislikes INTEGER DEFAULT(0) NOT NULL,
     created_at TEXT DEFAULT (DATETIME()) NOT NULL,
@@ -45,7 +45,7 @@ VALUES
 	('u003', 'Astrodev', 'astrodev@email.com', '$2a$12$lHyD.hKs3JDGu2nIbBrxYujrnfIX5RW5oq/B41HCKf7TSaq9RgqJ.', 'ADMIN');
 
 
-INSERT INTO posts (id, creator_id, name)
+INSERT INTO posts (id, creator_id, content)
   VALUES 
     ('p001','u001', 'Hoje acordei feliz'),
     ('p002','u002', 'Amanhã tenho prova de inglês! Estou estudando muito!');
