@@ -1,8 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 import dotenv from 'dotenv'
-import { userRouter } from './router/UserRouter'
-import { postRouter } from './router/PostRouter'
+import { userRouter } from './router/userRouter'
+import { postRouter } from './router/postRouter'
 
 dotenv.config()
 
