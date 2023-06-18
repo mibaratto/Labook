@@ -1,6 +1,6 @@
 import { UserDatabase } from "../database/UserDatabase";
 import { SignupInputDTO, SignupOutputDTO } from "../dtos/user/signup.dto";
-import { USER_ROLES, User } from "../models/User";
+import { TokenPayload, USER_ROLES, User } from "../models/User";
 import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
@@ -20,6 +20,7 @@ export class UserBusiness {
         const id = this.idGenerator.generate()
     
         const hashedPassword = await this.hashManager.hash(password)
+        
         const user = new User(
           id,
           name,
@@ -30,6 +31,7 @@ export class UserBusiness {
         )
     
         const userDB = user.toDBModel()
+
         await this.userDatabase.insertUser(userDB)
     
         const payload: TokenPayload = {
@@ -43,7 +45,6 @@ export class UserBusiness {
         const output: SignupOutputDTO = {
           token
         }
-    
         return output
       }
 
