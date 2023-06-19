@@ -37,7 +37,6 @@ export class UserController {
 
   public login = async (req: Request, res: Response) => {
     try {
-
       const input = LoginSchema.parse({
         email: req.body.email,
         password: req.body.password
