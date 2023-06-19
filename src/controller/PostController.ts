@@ -7,7 +7,7 @@ import { Request, Response } from "express";
 export class PostController {
     constructor(
         private postBusiness: PostBusiness
-    ){}
+    ) { }
 
     public createPost = async (req: Request, res: Response) => {
         try {
