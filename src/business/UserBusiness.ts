@@ -17,6 +17,7 @@ export class UserBusiness {
         input: SignupInputDTO
       ): Promise<SignupOutputDTO> => {
         const { name, email, password } = input
+        
         const id = this.idGenerator.generate()
     
         const hashedPassword = await this.hashManager.hash(password)
@@ -31,7 +32,6 @@ export class UserBusiness {
         )
     
         const userDB = user.toDBModel()
-
         await this.userDatabase.insertUser(userDB)
     
         const payload: TokenPayload = {
