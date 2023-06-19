@@ -77,7 +77,7 @@ export class UserBusiness {
       .compare(password, hashedPassword)
 
     if (!isPasswordCorrect) {
-      throw new BadRequestError("e-mail e/ou senha inválido(s)")
+      throw new BadRequestError("invalid password or email")
     }
 
     const payload: TokenPayload = {
@@ -93,5 +93,4 @@ export class UserBusiness {
     }
     return output
   }
-
 }
