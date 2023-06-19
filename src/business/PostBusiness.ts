@@ -35,6 +35,6 @@ export class PostBusiness {
             playload.name
         )
         const postDB = post.toDBModel()
-        await this.postDatabase.insertPlaylist(postDB)
+        await this.postDatabase.insertPost(postDB)
     }
 }
