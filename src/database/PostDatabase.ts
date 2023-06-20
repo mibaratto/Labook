@@ -13,4 +13,12 @@ export class PostDatabase extends BaseDatabase {
         .insert(postDB)
     }
 
+    public getPosts = async (): Promise<PostDB[]> => {
+        const postsDB = await BaseDatabase
+            .connection(PostDatabase.TABLE_POST)
+            .select()
+
+        return postsDB
+    }
+
 }
