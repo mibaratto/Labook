@@ -18,6 +18,6 @@ const postController = new PostController(
 postRouter.post("/", postController.createPost)
 postRouter.get("/", postController.getPosts)
 postRouter.put("/:id", postController.editPost)
-//playlistRouter.delete("/:id", playlistController.deletePlaylist)
+postRouter.delete("/:id", postController.deletePost)
 
 //playlistRouter.put("/:id/like", playlistController.likeOrDislikePlaylist)
