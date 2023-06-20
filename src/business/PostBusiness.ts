@@ -1,13 +1,16 @@
 import { PostDatabase } from "../database/PostDatabase";
 import { CreatePostInputDTO, CreatePostOutputDTO } from "../dtos/post/createPost.dto";
+import { DeletePostInputDTO, DeletePostOutputDTO } from "../dtos/post/deletePost.dto";
 import { EditPostInputDTO, EditPostOutputDTO } from "../dtos/post/editPost.dto";
 import { GetPostsInputDTO, GetPostsOutputDTO } from "../dtos/post/getPosts.dto";
 import { ForbiddenError } from "../erros/ForbiddenError";
 import { NotFoundError } from "../erros/NotFoundError";
 import { UnauthorizedError } from "../erros/UnauthorizedError";
 import { Post } from "../models/Post";
+import { USER_ROLES } from "../models/User";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenManager } from "../services/TokenManager";
+
 
 export class PostBusiness {
     constructor(
@@ -45,6 +48,7 @@ export class PostBusiness {
         return output
     }
 
+
     public getPosts = async (
         input: GetPostsInputDTO
       ): Promise<GetPostsOutputDTO> => {
@@ -79,6 +83,7 @@ export class PostBusiness {
     
         return output
       }
+
 
       public editPost = async (
         input: EditPostInputDTO
@@ -121,5 +126,36 @@ export class PostBusiness {
         const output: EditPostOutputDTO = undefined
     
         return output
-      }
+    }
+
+    
+    public deletePost = async (
+        input: DeletePostInputDTO
+      ): Promise<DeletePostOutputDTO> => {
+        const { token, idToDelete } = input
+    
+        const payload = this.tokenManager.getPayload(token)
+    
+        if (!payload) {
+          throw new UnauthorizedError()
+        }
+    
+        const postDB = await this.postDatabase.findPostById(idToDelete)
+    
+        if (!postDB) {
+            throw new NotFoundError("post with this id does not exist")
+        }
+    
+        if (payload.role !== USER_ROLES.ADMIN) {
+          if (payload.id !== postDB.creator_id) {
+            throw new ForbiddenError("only the creator of the post can edit it")
+          }
+        }
+    
+        await this.postDatabase.deletePostById(idToDelete)
+    
+        const output: DeletePostOutputDTO = undefined
+    
+        return output
+    }
 }

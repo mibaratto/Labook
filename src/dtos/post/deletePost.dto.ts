@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export interface DeletePosttInputDTO {
+export interface DeletePostInputDTO {
     token: string,
     idToDelete: string
 }
