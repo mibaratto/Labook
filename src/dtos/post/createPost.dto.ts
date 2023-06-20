@@ -8,7 +8,7 @@ export interface CreatePostInputDTO {
 export type CreatePostOutputDTO = undefined
 
 
-export const CreatePlaylistSchema = z.object({
+export const CreatePostSchema = z.object({
     content: z.string().min(1),
     token: z.string().min(1)
 }).transform(data => data as CreatePostInputDTO)
