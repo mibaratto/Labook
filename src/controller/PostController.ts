@@ -39,12 +39,11 @@ export class PostController {
             const input = GetPostsSchema.parse({
                 token: req.headers.authorization
             })
-            const output = await this.postBusiness.getPost(input)
+            const output = await this.postBusiness.getPosts(input)
             res.status(200).send(output)
             
         } catch (error) {
             console.log(error)
-
             if (error instanceof ZodError) {
                 res.status(400).send(error.issues)
             } else if (error instanceof BaseError) {

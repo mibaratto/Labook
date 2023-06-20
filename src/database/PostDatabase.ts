@@ -1,5 +1,6 @@
-import { PostDB } from "../models/Post";
+import { PostDB, PostDBWithCreatorName } from "../models/Post";
 import { BaseDatabase } from "./BaseDatabase";
+import { UserDatabase } from "./UserDatabase";
 
 export class PostDatabase extends BaseDatabase {
     public static TABLE_POST = 'posts'
@@ -13,12 +14,29 @@ export class PostDatabase extends BaseDatabase {
         .insert(postDB)
     }
 
-    public getPosts = async (): Promise<PostDB[]> => {
-        const postsDB = await BaseDatabase
-            .connection(PostDatabase.TABLE_POST)
-            .select()
+    public getPostsWithCreatorName =
+    async (): Promise<PostDBWithCreatorName[]> => {
 
-        return postsDB
-    }
+    const result = await BaseDatabase
+      .connection(PostDatabase.TABLE_POST)
+      .select(
+        `${PostDatabase.TABLE_POST}.id`,
+        `${PostDatabase.TABLE_POST}.creator_id`,
+        `${PostDatabase.TABLE_POST}.content`,
+        `${PostDatabase.TABLE_POST}.likes`,
+        `${PostDatabase.TABLE_POST}.dislikes`,
+        `${PostDatabase.TABLE_POST}.created_at`,
+        `${PostDatabase.TABLE_POST}.updated_at`,
+        `${UserDatabase.TABLE_USERS}.name as creator_name`
+      )
+      .join(
+        `${UserDatabase.TABLE_USERS}`,
+        `${PostDatabase.TABLE_POST}.creator_id`, 
+        "=",
+        `${UserDatabase.TABLE_USERS}.id`
+      )
+    
+    return result as PostDBWithCreatorName[]
+  }
 
 }
