@@ -16,7 +16,7 @@ const postController = new PostController(
 )
 
 postRouter.post("/", postController.createPost)
-//playlistRouter.get("/", playlistController.getPlaylists)
+postRouter.get("/", postController.getPosts)
 ////playlistRouter.put("/:id", playlistController.editPlaylist)
 //playlistRouter.delete("/:id", playlistController.deletePlaylist)
 
