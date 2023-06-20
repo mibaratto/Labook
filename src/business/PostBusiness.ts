@@ -36,5 +36,8 @@ export class PostBusiness {
         )
         const postDB = post.toDBModel()
         await this.postDatabase.insertPost(postDB)
+
+        const output: CreatePostOutputDTO = undefined
+        return output
     }
 }
