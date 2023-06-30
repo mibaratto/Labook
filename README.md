@@ -18,5 +18,8 @@ The project is a back-end application made during the Labenu bootcamp. The main 
 - User is allowed to like and dislike posts by other users
 - It is possible comment others posts
 
+## DB Diagram
+![labookDBDiagram](https://github.com/mibaratto/Labook/assets/15133580/932f5852-5e93-4542-b52a-72e24e74298e)
+
 ## Link to postman documentation
-https://documenter.getpostman.com/view/25826635/2s93zB62RN
+https://documenter.getpostman.com/view/25826635/2s93z3h65W
